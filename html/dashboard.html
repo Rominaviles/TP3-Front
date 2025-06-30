@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Img/Icon.png" type="image/icon">
+    <title>Dashboard | Gestor Proyectos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="contenedor">
+
+        <div class="sidebar">
+                <div class="margin-bottom">
+                    <h1 class="titulo">Gestor de Proyectos</h1>
+                </div>
+                <nav>
+                    <div class="nav activo" onclick="showSection('dashboard')">
+                        <div>🏠</div>
+                        <span> Dashboard</span>
+                    </div>
+                    <div class="nav" data-modal-open="crearProyecto">
+                        <div>📋</div>
+                        <span> Crear Proyecto</span>
+                    </div>
+                </nav>
+        </div>
+
+        <div class="main">
+
+            <div class="header"> 
+                <div class="header-contenedor">
+                    <div class="user"></div>
+                        <h2 id="bienvenidoUsuario">¡Bienvenido!</h2>
+                        <p class="subtitulo">Gestiona tus proyectos de manera eficiente</p>
+                </div>
+                    <div class="btn btn-secundario" id="btnCerrarSesion">
+                        <span>Cerrar sesión</span>
+                    </div>
+            </div>              
+
+            <div class="estados-contenedor">
+                <div class="estado-item">
+                    <div class="estado-icono total-proyecto">📊</div>
+                    <div class="estado-valor">24</div>
+                    <div class="estado">Total Proyectos</div>
+                </div>
+                <div class="estado-item">
+                    <div class="estado-icono pendiente">⏳</div>
+                    <div class="estado-valor">8</div>
+                    <div class="estado">Pendientes</div>
+                </div>
+                <div class="estado-item">
+                    <div class="estado-icono aprobado">✅</div>
+                    <div class="estado-valor">12</div>
+                    <div class="estado">Aprobados</div>
+                </div>
+                <div class="estado-item">
+                    <div class="estado-icono rechazado">❌</div>
+                    <div class="estado-valor">4</div>
+                    <div class="estado">Rechazados</div>
+                </div>
+            </div>
+
+            <div class="filtrado-contenedor ?">
+                <div class="filtrado-seccion">
+                    <h3 class="filtrado-titulo">Filtrar Proyectos</h3>
+                    <div class="filtrado">
+                        <input type="text" id="tituloFiltrado" class="filtrado-input brillo" placeholder="Título del proyecto" >
+                        <select id="estadoFiltrado" class="filtrado-input brillo" >
+                            <option>Todos los estados</option>
+                        </select>
+                        <select id="responsableFiltrado" class="filtrado-input brillo" >
+                            <option value="">Todos los solicitantes</option>
+                        </select>
+                        <select id="aprobadorFiltrado" class="filtrado-input brillo" >
+                            <option value="">Todos los aprobadores</option>
+                        </select>
+                        <button id="btnFiltrar" class="btn btn-primario" >Filtrar</button>
+                    </div>
+                    
+                   <div id="tablaProyectos">
+                        <div class="header-tabla">
+                            <div>Título</div>
+                            <div>Estado</div>
+                            <div>Tipo</div>
+                            <div>Area</div>
+                            <div>Acciones</div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="crearProyectoModal">
+        <div class="modal-contenedor crear-proyecto">
+            <div class="modal-header">
+                <h3>Crear Nuevo Proyecto</h3>
+                <button class="close-btn" data-modal-close="crearProyecto">&times;</button>
+            </div>
+            <form id="createProjectForm">
+                <div class="form-cont">
+                    <label class="form-label">Título del Proyecto</label>
+                    <input type="text" name="titulo" class="input form-input" placeholder="Ingrese el título" required>
+                </div>
+                <div class="form-cont">
+                    <label class="form-label">Descripción</label>
+                    <textarea name="descripcion" class="input form-input" placeholder="Describa el proyecto" required></textarea>
+                </div>
+                <div class="form-cont">
+                    <label class="form-label">Área</label>
+                    <select id="selectArea" class="input form-input" name="area" required>
+                        <option value="">Seleccione un área</option>
+                    </select>
+                </div>
+                <div class="form-cont">
+                    <label class="form-label">Tipo de Proyecto</label>
+                    <select class="input form-input" name="tipoProyecto" required>
+                        <option value="">Seleccione el tipo</option>
+                    </select>
+                </div>
+                <div class="form-cont">
+                    <label class="form-label">Duracion Estimada</label>
+                    <input type="text" name="duracion" class="input form-input" placeholder="Ingrese la duracion estimada en dias" required>
+                </div>
+                <div class="form-cont">
+                    <label class="form-label">Presupuesto Estimado</label>
+                    <input type="text" name="presupuesto" class="input form-input" placeholder="$0.00" required>
+                </div>
+                <div class="form-btn">
+                    <button type="button" class="btn btn-secundario" data-modal-close="crearProyecto">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Crear Proyecto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="verProyectoModal">
+        <div class="modal-contenedor ver-proyecto">
+            <div class="modal-header">
+                <h3>Detalles del Proyecto</h3>
+                <button class="close-btn" data-modal-close="verProyecto">&times;</button>
+            </div>
+
+            <div class="proyecto-titulo" id="modalTitulo"></div>
+            <div class="subtitulo-proyecto detalle-item" id="modalDescripcion"></div>
+
+            <div class="detalle-contenedor">
+                <div class="seccion-izquierda">
+                    <div class="detalle-item">
+                        <div class="detalle-grid">
+                            <div class="detalle-campo">
+                                <div class="form-label">Solicitante</div>
+                                <div id="modalSolicitante"></div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Tipo de proyecto</div>
+                                <div id="modalTipoProyecto"></div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Área</div>
+                                <div id="modalArea"></div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Estado</div>
+                                <div id="modalEstado">
+                                <span class="estado-fondo"></span>
+                                </div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Monto estimado</div>
+                                <div id="modalMonto">$</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Duración estimada</div>
+                                <div id="modalDuracion"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detalle-item">
+                        <div class="detalle-campo observaciones">
+                            <div class="form-label">Observaciones</div>
+                            <div id="modalObservaciones"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seccion-derecha">
+                    <div class="detalle-item workflow">
+                        <div class="form-label">Estado del Proyecto</div>
+                        <div id="modalWorkflow"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-secundario" data-modal-close="verProyecto">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="editarProyectoModal">
+        <div class="modal-contenedor ver-proyecto">
+            <div class="modal-header">
+                <h3>Detalles del Proyecto</h3>
+                <button class="close-btn" data-modal-close="editarProyecto">&times;</button>
+            </div>
+
+            <div class="form-cont">
+                <label class="form-label">Título del Proyecto</label>
+                <input type="text" name="titulo" class="input form-input" placeholder="Ingrese el título nuevo" required>
+            </div>
+            <div class="form-cont">
+                <label class="form-label">Descripción</label>
+                <textarea name="descripcion" class="input form-input" placeholder="Describa el proyecto" required></textarea>
+            </div>
+            <div class="detalle-contenedor">
+                <div class="seccion-izquierda">
+                    <div class="detalle-item">
+                        <div class="detalle-grid">
+                            <div class="detalle-campo">
+                                <div class="form-label">Solicitante</div>
+                                <div>Juan Pérez</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Tipo de proyecto</div>
+                                <div>Desarrollo de Software</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Área</div>
+                                <div>Tecnología</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Estado</div>
+                                <div>
+                                    <span class="estado-fondo pendiente">Pendiente</span>
+                                </div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Monto estimado</div>
+                                <div>$25,000.00</div>
+                            </div>
+                            <div class="form-cont">
+                                <label class="form-label">Duracion Estimada</label>
+                                <input type="text" name="duracion" class="input form-input" placeholder="Ingrese duracion en dias" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detalle-item">
+                        <div class="detalle-campo observaciones">
+                            <div class="form-label">Observaciones</div>
+                            <div>
+                                El proyecto requiere integración con el sistema ERP existente. Se debe considerar migración de datos históricos y capacitación del personal. Revisión de seguridad requerida antes de la implementación final.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seccion-derecha">
+                    <div class="detalle-item workflow">
+                        <div class="form-label">Estado del Proyecto</div>
+                        
+                        <div class="workflow-item">
+                            <div class="workflow-circulo aprobado">✓</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Aprobado</div>
+                                <div class="workflow-persona">María García</div>
+                                <div class="workflow-rol">Supervisor</div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-item">
+                            <div class="workflow-circulo observado">👁</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Observado</div>
+                                <div class="workflow-persona">Carlos López</div>
+                                <div class="workflow-rol">Gerente</div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-item">
+                            <div class="workflow-circulo pendiente">?</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Pendiente</div>
+                                <div class="workflow-persona">María Gutiérrez</div>
+                                <div class="workflow-rol">Director</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn">
+                <button type="button" class="btn btn-guardar" data-modal-close="editarProyecto">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="decisionProyectoModal">
+        <div class="modal-contenedor ver-proyecto">
+            <div class="modal-header">
+                <h3>Detalles del Proyecto</h3>
+                <button class="close-btn" data-modal-close="decisionProyecto">&times;</button>
+            </div>
+
+            <div class="proyecto-titulo">Gestoria de Recursos Humanos</div>
+            <div class="subtitulo-proyecto detalle-item">
+                Sistema integral para la gestión y control de inventarios que permitirá un seguimiento detallado de productos, automatización de procesos de compra y venta, y generación de reportes en tiempo real para optimizar la gestión empresarial.
+            </div>
+
+            <div class="detalle-contenedor">
+                <div class="seccion-izquierda">
+                    <div class="detalle-item">
+                        <div class="detalle-grid">
+                            <div class="detalle-campo">
+                                <div class="form-label">Solicitante</div>
+                                <div>Juan Pérez</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Tipo de proyecto</div>
+                                <div>Desarrollo de Software</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Área</div>
+                                <div>Tecnología</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Estado</div>
+                                <div>
+                                    <span class="estado-fondo pendiente">Pendiente</span>
+                                </div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Monto estimado</div>
+                                <div>$25,000.00</div>
+                            </div>
+                            <div class="detalle-campo">
+                                <div class="form-label">Duración estimada</div>
+                                <div >90 días</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detalle-item">
+                        <div class="form-cont">
+                            <label class="form-label">Observaciones</label>
+                            <textarea name="descripcion" class="input form-input" placeholder="Ingrese observacion si se requiere" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="seccion-derecha">
+                    <div class="detalle-item workflow">
+                        <div class="form-label">Estado del Proyecto</div>
+                        
+                        <div class="workflow-item">
+                            <div class="workflow-circulo aprobado">✓</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Aprobado</div>
+                                <div class="workflow-persona">María García</div>
+                                <div class="workflow-rol">Supervisor</div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-item">
+                            <div class="workflow-circulo observado">👁</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Observado</div>
+                                <div class="workflow-persona">Carlos López</div>
+                                <div class="workflow-rol">Gerente</div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-item">
+                            <div class="workflow-circulo pendiente">?</div>
+                            <div class="workflow-info">
+                                <div class="workflow-estado">Pendiente</div>
+                                <div class="workflow-persona">María Gutiérrez</div>
+                                <div class="workflow-rol">Director</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-btn-decision">
+                <button type="button" class="btn-rechazar" data-modal-close="decisionProyecto">Rechazar</button>
+                <button type="button" class="btn-modificaciones">Solicitar Modificacion</button>
+                <button type="button" class="btn-aprobar">Aprobar</button>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+<script type="module" src="../javascript/app.js"></script>
+<script type="module" src="../javascript/metodos/mostrarUsuario.js"></script>
+</html>

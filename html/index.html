@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../Img/Icon.png" type="image/icon">
+    <title>Login | Gestor Proyecto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="pagina-login">
+    <div class="login-contenedor">
+        <h1 class="titulo centrar-texto">Gestor de Proyectos</h1>
+        <p class="subtitulo centrar-texto">Gestiona, colabora, aprueba</p>
+
+        <div class="login-box">
+            <h2>Iniciar Sesión</h2>
+            <form id="form-login">
+                <label class="login-label" for="email">Correo electrónico</label>
+                <input class="input login-input brillo" type="email" id="input-email" placeholder="Ingrese su mail" required />
+                <button class="btn btn-primario" type="submit">Ingresar</button>
+            </form>
+            <p id="mensaje-login"></p>
+        </div>
+    </div>
+</body>
+<script type="module" src="../javascript/metodos/loginUsuario.js"></script>
+</html>
