@@ -2,7 +2,7 @@ import obtenerAreas from '../fetchs/Informacion/obtenerArea.js';
 import obtenerTiposProyecto from '../fetchs/Informacion/obtenerTipoProy.js';
 import crearProyecto from '../fetchs/Gestion/crearProyecto.js';
 
-import crearPayloadProyecto from '../services/crearPayloadProyecto.js';
+import crearPayloadProyecto from '../services/crearPayloadProyectoService.js';
 import mapearProyectoCreado from '../mapeos/mapearProyectoCreado.js';
 
 export async function initFormCreateProject() {

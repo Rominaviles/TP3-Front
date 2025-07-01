@@ -1,4 +1,4 @@
-import { obtenerUsuariosParaSelect } from '../services/filtarUsuario.js';
+import { obtenerUsuariosParaSelect } from '../services/filtarUsuarioService.js';
 import { usuariosEnSelect } from '../mapeos/mapearUsuarioFiltrado.js';
 
 export async function cargarUsuariosEnSelect() {

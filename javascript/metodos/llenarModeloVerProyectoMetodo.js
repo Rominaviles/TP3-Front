@@ -1,6 +1,6 @@
 import obtenerProyectoPorId  from '../fetchs/Gestion/obtenerProyectoPorId.js';
 import { llenarModalProyecto } from '../mapeos/mapearProyectoVer.js';
-import { openModal } from './modalManejo.js';
+import { openModal } from './modalManejoMetodo.js';
 
 export function inicializarBotonesVerProyecto() {
   const tabla = document.getElementById('tablaProyectos');

@@ -1,4 +1,4 @@
-import { obtenerEstadosParaSelect } from '../services/filtrarEstados.js';
+import { obtenerEstadosParaSelect } from '../services/filtrarEstadosService.js';
 import { estadosEnSelect } from '../mapeos/mapearEstadoFiltrado.js';
 
 export async function cargarEstadosEnSelect() {
